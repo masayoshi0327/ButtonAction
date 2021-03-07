@@ -8,10 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var word = ""
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack{
+            Text(word)
+                .padding()
+                .font(.title)
+            Button(action: {
+                a(word: &word)
+            }, label: {
+                Text("Button")
+            })
+        }
     }
+}
+
+func a(word : inout String) {
+    word = "Hello!"
 }
 
 struct ContentView_Previews: PreviewProvider {
