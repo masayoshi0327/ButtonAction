@@ -8,24 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var output = ""
     @State var word = ""
+    @State var callSasuke = false
+    @State var callNezuko = false
     
     var body: some View {
         VStack{
-            Text(word)
+            Text(output)
                 .padding()
                 .font(.title)
+            TextField("名前を入力", text: $word)
+                .frame(width: 300)
+                .padding()
+                .border(Color.black)
             Button(action: {
-                a(word: &word)
+                printName(word, &callSasuke, &callNezuko)
+                output = word
             }, label: {
                 Text("Button")
             })
+            .alert(isPresented: $callSasuke) {
+                Alert(title: Text("サスケエエエエエエエエエエエエエエエエエエエエ！！！！！"))
+            }
+            .alert(isPresented: $callNezuko) {
+                Alert(title: Text("ねずこおおおおおおおおおおおおおおおおおおおお！！！！！"))
+            }
         }
     }
 }
 
-func a(word : inout String) {
-    word = "Hello!"
+func printName(_ word: String, _ bool1: inout Bool, _ bool2: inout Bool) -> String {
+    guard word != "サスケ" else {
+        bool1 = true
+        return "サスケ"
+    }
+    guard word != "ねずこ" else {
+        bool2 = true
+        return "ねずこ"
+    }
+    return word
 }
 
 struct ContentView_Previews: PreviewProvider {
